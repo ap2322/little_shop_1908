@@ -91,6 +91,37 @@ img{
    text-align: center;
  }
 
+ .cart-grid-container{
+   display: grid;
+   grid-template-columns: auto;
+   grid-gap: 10px;
+   grid-auto-rows: minmax(80%, auto);
+   max-width: 100%;
+   margin: 0 auto;
+   border-radius: 2px;
+   border-color: black;
+ }
+
+ .cart-grid-item{
+   display: grid;
+   grid-template-columns: repeat(7, 1fr);
+   max-width: 100%;
+ }
+
+ .cart-field{
+   align-self: start;
+ }
+
+ .cart-grid-footer{
+   grid-template-columns: repeat(3, 1fr);
+   align-content: end;
+ }
+
+ .cart-footer-item{
+   grid-column: 3/3;
+   align-self:flex-end;
+ }
+
  input[type=text], select {
   width: 100%;
   padding: 12px 20px;

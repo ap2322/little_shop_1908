@@ -3,24 +3,29 @@
   <p>Your cart is empty</p>
 <% end %>
 
-<section id="cart-table">
+<section class="cart-grid-container" id="cart-table" >
 <% @items.each do |item| %>
-  <section id= "item-<%=item.id%>">
-    <p> <%= item.name %></p>
-    <p> <%= item.merchant.name %></p>
-    <p> <%= item.price %></p>
-    <img src= <%= item.image %>>
-
-    <p> <%= button_to "-", "/cart/decrement_item/#{item.id}", method: :patch %>&nbsp;
+  <section class="cart-grid-item" id= "item-<%=item.id%>" >
+    <p class="cart-field"> <%= item.name %></p>
+    <p class="cart-field"> <%= item.merchant.name %></p>
+    <p class="cart-field"> <%= item.price %></p>
+    <img class="cart-field" id= "photo" src= <%= item.image %> >
+    <div class="cart-field">
+    <%= button_to "-", "/cart/decrement_item/#{item.id}", method: :patch %>&nbsp;
         Quantity: <%= cart.count_of(item.id) %>&nbsp;
-        <%= button_to "+", "/cart/increment_item/#{item.id}", method: :patch %>
-    </p>
-    <p><%= button_to "Remove Item", "/cart/remove_item/#{item.id}", method: :delete %></p>
-    <p> Item Subtotal: <%= number_to_currency(cart.subtotal(item.id)) %></p>
+    <%= button_to "+", "/cart/increment_item/#{item.id}", method: :patch %>
+    </div>
+    <p class="cart-field"> Item Subtotal: <%= number_to_currency(cart.subtotal(item.id)) %></p>
+    <%= button_to "Remove Item", "/cart/remove_item/#{item.id}", method: :delete %>
   </section>
 <% end %>
+  <section class = "cart-grid-footer">
+    <p class="cart-footer-item"> Grand Total: <%= number_to_currency(cart.grand_total) %></p>
+    <div class="cart-footer-item">
+      <%= link_to "Empty Cart", "/cart/empty", method: :delete %>
+    </div>
+    <div class="cart-footer-item">
+      <%= button_to "Checkout", "/orders/new", method: :get %>
+    </div>
+  </section>
 </section>
-
-<p> Grand Total: <%= number_to_currency(cart.grand_total) %></p>
-<p><%= link_to "Empty Cart", "/cart/empty", method: :delete %></p>
-<%= button_to "Checkout", "/orders/new", method: :get %>
