@@ -16,7 +16,9 @@
         <p style= "color:red">Inactive</p>
       <% end %>
       <p><%= link_to "Edit Item", "/items/#{@item.id}/edit" %></p>
-      <p><%= link_to "Delete Item", "/items/#{@item.id}", method: :delete %></p>
+      <% if !@item.in_order? %>
+        <p><%= link_to "Delete Item", "/items/#{@item.id}", method: :delete %></p>
+      <% end %>
       <p><%= link_to "Review This Item", "/items/#{@item.id}/reviews/new" %></p>
       <%= button_to "Add to Cart", "/cart/#{@item.id}", method: :patch %>
     </section>

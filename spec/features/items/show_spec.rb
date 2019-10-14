@@ -81,7 +81,6 @@ RSpec.describe 'item show page', type: :feature do
 
         expect(page).to have_content("Average Rating: 2.43")
       end
-
     end
   end
 
