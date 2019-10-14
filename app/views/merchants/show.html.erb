@@ -7,3 +7,13 @@
 <% if !@merchant.items_in_order? %>
   <ul><%= link_to "Delete Merchant", "/merchants/#{@merchant.id}", method: :delete %> </ul>
 <% end %>
+<br>
+<center>
+  <p>Total Items for <%= @merchant.name %>: <%= @merchant.count_items %></p>
+  <p>Average Price of <%= @merchant.name %>'s Items: <%= number_to_currency(@merchant.average_item_price) %></p>
+  <ul>Customer Cities:
+  <% @merchant.customer_cities.each do |city| %>
+    <li><%= city %></li>
+  <% end %>
+  </ul>
+</center>
