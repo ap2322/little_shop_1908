@@ -11,10 +11,11 @@ describe Item, type: :model do
   end
 
   describe "relationships" do
-    it {should belong_to :merchant}
-    it {should have_many :reviews }
-    it {should have_many :item_orders}
+    it {should belong_to :merchant }
+    it {should have_many(:reviews).dependent(:destroy) }
+    it {should have_many(:item_orders).dependent(:destroy) }
     it {should have_many(:orders).through(:item_orders)}
+
   end
 
   describe "methods" do

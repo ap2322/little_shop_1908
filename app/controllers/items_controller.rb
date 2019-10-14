@@ -34,8 +34,7 @@ class ItemsController<ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
+    Item.destroy(params[:id])
     redirect_to "/items"
   end
 
