@@ -30,5 +30,24 @@ RSpec.describe 'merchant new page', type: :feature do
       expect(new_merchant.zip).to eq(zip)
     end
 
+    it "doesn't create a new merchant and shows flash message with incomplete information" do
+      visit '/merchants/new'
+
+      name = "Sal's Calz(ones)"
+      address = '123 Kindalikeapizza Dr.'
+      city = "Denver"
+      state = "CO"
+      zip = 80204
+
+      fill_in :name, with: name
+      fill_in :address, with: address
+      fill_in :state, with: state
+      fill_in :zip, with: zip
+
+      click_button "Create Merchant"
+
+      expect(page).to have_content("Merchant not created, please fill in all fields")
+      expect(page).to have_content("Create Merchant")
+    end
   end
 end

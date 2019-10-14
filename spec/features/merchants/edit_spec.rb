@@ -33,5 +33,17 @@ RSpec.describe "As a Visitor" do
       expect(page).to have_content("Brian's Super Cool Bike Shop")
       expect(page).to have_content("1234 New Bike Rd.\nDenver, CO 80204")
     end
+
+    it "doesn't update merchant and shows flash message with incomplete information" do
+      visit "/merchants/#{@bike_shop.id}/edit"
+
+      fill_in :name, with: ""
+
+      click_button "Update Merchant"
+
+      expect(page).to have_content("Merchant not updated, please fill in all fields")
+      expect(page).to have_button("Update Merchant")
+    end
+
   end
 end
