@@ -23,4 +23,8 @@ class Item <ApplicationRecord
   def average_rating
     reviews.average(:rating).to_f.round(2)
   end
+
+  def in_order?
+    !item_orders.all.empty?
+  end
 end
