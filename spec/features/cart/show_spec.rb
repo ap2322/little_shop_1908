@@ -30,13 +30,13 @@ RSpec.describe "cart show page" do
       expect(page).to have_content(@chain.name)
       expect(page).to have_css("img[src*='#{@chain.image}']")
       expect(page).to have_content(@chain.merchant.name)
-      expect(page).to have_content(@chain.price)
+      expect(page).to have_content("Item Price: $50.00")
       expect(page).to have_content("Quantity: 1")
       expect(page).to have_content("Item Subtotal: $50.00")
       expect(page).to have_content(@shifter.name)
       expect(page).to have_css("img[src*='#{@shifter.image}']")
       expect(page).to have_content(@shifter.merchant.name)
-      expect(page).to have_content(@shifter.price)
+      expect(page).to have_content("Item Price: $180.00")
       expect(page).to have_content("Quantity: 2")
       expect(page).to have_content("Item Subtotal: $360.00")
       expect(page).to have_content("Grand Total: $410.00")
@@ -64,7 +64,7 @@ RSpec.describe "cart show page" do
       click_link "Empty Cart"
 
       expect(page).to have_content("Your cart is empty")
-      expect(page).to_not have_link("Empty cart")
+      expect(page).to_not have_link("Empty Cart")
       expect(page).to_not have_content("Chain")
       expect(page).to_not have_content("Shimano Shifters")
       expect(current_path).to eq '/cart'
@@ -122,15 +122,15 @@ RSpec.describe "cart show page" do
         click_button "+"
         expect(page).to have_content("Quantity: 2")
       end
-      expect(current_path).to eq('/cart')
+      expect(page).to_not have_content("Only 5 Chains in stock")
 
       within "#item-#{@shifter.id}" do
         expect(page).to have_content("Quantity: 2")
         click_button "+"
         expect(page).to have_content("Quantity: 2")
       end
+
       expect(page).to have_content("Only 2 Shimano Shifters in stock")
-      expect(current_path).to eq('/cart')
     end
 
     it "can decrement the count of an individual item according to inventory" do

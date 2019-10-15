@@ -9,7 +9,7 @@
 
     <%= text_field_tag :state, nil, placeholder: "State" %>
 
-    <%= text_field_tag :zip, nil, placeholder: "Zip" %>
+    <%= text_field_tag :zip, nil, placeholder: "Zip", pattern: "[0-9]{5}" %>
 
     <%= submit_tag 'Create Merchant' %>
   <% end %>

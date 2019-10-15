@@ -30,14 +30,14 @@ class CartController < ApplicationController
   end
 
   def increment_item
-    cart.plus_one_item(params[:item_id])
     item = Item.find(params[:item_id])
-    if cart.contents == session[:cart]
-      flash[:cart_inventory_error] = "Only #{pluralize(item.inventory, item.name) } in stock"
+    if item.inventory < (cart.count_of(item.id) + 1)
+      flash.now[:cart_inventory_error] = "Only #{pluralize(item.inventory, item.name) } in stock"
     end
+    cart.plus_one_item(params[:item_id])
     session[:cart] = cart.contents
-
-    redirect_to '/cart'
+    @items = Item.where(id: cart.contents.keys)
+    render :show
   end
 
   def decrement_item
