@@ -4,7 +4,6 @@ RSpec.describe "Edit a Review" do
   before(:each) do
     @bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
     @chain = @bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 50, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 5)
-
     @review_1 = @chain.reviews.create(title: "This stunk", content: "super smelly", rating: 1)
   end
 
@@ -40,20 +39,6 @@ RSpec.describe "Edit a Review" do
 
       expect(page).to have_content("Review not updated. Please fill in all fields.")
       expect(page).to have_button("Update Review")
-
     end
   end
 end
-
-
-# As a visitor,
-# When I visit an item's show page
-# I see a link to edit the review next to each review.
-# When I click on this link, I am taken to an edit review path
-# On this new page, I see a form that includes:
-# - title
-# - numeric rating
-# - text of the review itself
-# I can update any of these fields and submit the form.
-# When the form is submitted, I should return to that item's
-# show page and I should see my updated review

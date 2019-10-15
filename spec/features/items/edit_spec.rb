@@ -6,10 +6,9 @@ RSpec.describe "As a Visitor" do
       before (:each) do
         @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
         @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
-
       end
-      it 'I can see the prepopulated fields of that item' do
 
+      it 'I can see the prepopulated fields of that item' do
         visit "/items/#{@tire.id}"
 
         expect(page).to have_link("Edit Item")
@@ -26,7 +25,6 @@ RSpec.describe "As a Visitor" do
       end
 
       it 'I can change and update item with the form' do
-
         visit "/items/#{@tire.id}"
 
         click_on "Edit Item"
