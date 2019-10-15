@@ -50,5 +50,20 @@ RSpec.describe "Create Merchant Items" do
       expect(page).to_not have_content(new_item.description)
       expect(page).to have_content("Inventory: #{new_item.inventory}")
     end
+
+    it "doesn't create a new item and shows flash message with incomplete information" do
+      visit "/merchants/#{@brian.id}/items"
+      click_on "Add New Item"
+
+      fill_in :name, with: "Chamois Buttr"
+      fill_in :price, with: 18
+      fill_in :image, with: "https://images-na.ssl-images-amazon.com/images/I/51HMpDXItgL._SX569_.jpg"
+      fill_in :inventory, with: 25
+
+      click_button "Create Item"
+
+      expect(page).to have_content("Description can't be blank")
+      expect(page).to have_button("Create Item")
+    end
   end
 end
