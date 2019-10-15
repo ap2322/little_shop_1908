@@ -28,7 +28,7 @@
     <%= text_field_tag :state, nil, placeholder: "State" %>
 
     <%= label_tag :zip, "Zip" %>
-    <%= text_field_tag :zip, nil, placeholder: "Zip" %>
+    <%= text_field_tag :zip, nil, placeholder: "Zip", pattern: "[0-9]{5}" %>
 
     <%= submit_tag "Create Order" %>
   <% end %>
