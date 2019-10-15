@@ -18,7 +18,7 @@
       <p> Item Subtotal: <%= number_to_currency(@order.subtotal_of_item(item.id)) %></p>
     </section>
   <% end %>
-  <p> Grand Total: <%= number_to_currency(cart.grand_total) %></p>
+  <p> Grand Total: <%= number_to_currency(@order.grand_total) %></p>
   <p> Date of Order: <%= @order.created_at.strftime("%D") %></p>
 </section>
 
