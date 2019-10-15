@@ -8,7 +8,7 @@
   <section id= "item-<%=item.id%>">
     <p> <%= item.name %></p>
     <p> <%= item.merchant.name %></p>
-    <p> <%= item.price %></p>
+    <p> Item Price: <%= number_to_currency(item.price) %></p>
     <img src= <%= item.image %>>
 
     <p> <%= button_to "-", "/cart/decrement_item/#{item.id}", method: :patch %>&nbsp;
