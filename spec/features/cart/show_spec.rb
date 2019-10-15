@@ -76,6 +76,7 @@ RSpec.describe "cart show page" do
       expect(page).to_not have_content("Chain")
       expect(page).to_not have_content("Shimano Shifters")
       expect(current_path).to eq '/cart'
+      expect(page).to_not have_button("Checkout")
       within "#cart" do
         expect(page).to have_content("0")
       end

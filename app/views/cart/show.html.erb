@@ -23,4 +23,6 @@
 
 <p> Grand Total: <%= number_to_currency(cart.grand_total) %></p>
 <p><%= link_to "Empty Cart", "/cart/empty", method: :delete %></p>
-<%= button_to "Checkout", "/orders/new", method: :get %>
+<% if !@items.empty? %>
+  <%= button_to "Checkout", "/orders/new", method: :get %>
+<% end %>
