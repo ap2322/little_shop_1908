@@ -29,6 +29,7 @@ RSpec.describe 'item delete', type: :feature do
 
       expect(current_path).to eq("/items")
       expect(page).to_not have_css("#item-#{chain.id}")
+      expect(Review.all).to eq([])
     end
   end
 
