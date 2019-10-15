@@ -22,7 +22,7 @@
 </section>
 
 <p> Grand Total: <%= number_to_currency(cart.grand_total) %></p>
-<p><%= link_to "Empty Cart", "/cart/empty", method: :delete %></p>
 <% if !@items.empty? %>
+  <%= link_to "Empty Cart", "/cart/empty", method: :delete %>
   <%= button_to "Checkout", "/orders/new", method: :get %>
 <% end %>

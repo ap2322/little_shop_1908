@@ -64,7 +64,7 @@ RSpec.describe "cart show page" do
       click_link "Empty Cart"
 
       expect(page).to have_content("Your cart is empty")
-      expect(page).to_not have_link("Empty cart")
+      expect(page).to_not have_link("Empty Cart")
       expect(page).to_not have_content("Chain")
       expect(page).to_not have_content("Shimano Shifters")
       expect(current_path).to eq '/cart'
