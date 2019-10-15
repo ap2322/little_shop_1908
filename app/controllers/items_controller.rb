@@ -36,7 +36,13 @@ class ItemsController<ApplicationController
   def update
     item = Item.find(params[:id])
     item.update(item_params)
-    redirect_to "/items/#{item.id}"
+    if item.save
+      redirect_to "/items/#{item.id}"
+    else
+      flash.now[:errors] = item.errors.full_messages
+      @item = Item.find(params[:id])
+      render :edit
+    end
   end
 
   def destroy
