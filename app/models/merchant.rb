@@ -24,12 +24,7 @@ class Merchant <ApplicationRecord
   end
 
   def top_items
-    # All in ruby, need to find Active Record way to do the same thing!
-    avg_ratings = {}
-    items.each do |item|
-      key = item.id
-      avg_ratings[key] = item.average_rating
-    end
+    avg_ratings = items.joins(:reviews).group(:item_id).average(:rating)
     sorted = avg_ratings.sort_by{|item_id, rating| rating}.reverse
     top_3 = sorted.map {|item_id, rating| items.find(item_id)}
     top_3[0..2]
