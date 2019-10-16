@@ -1,0 +1,51 @@
+<section id="cart-table">
+  <table>
+    <thead>
+      <tr>
+        <% if cart_path %>
+          <td></td>
+        <% end %>
+        <td>Item Name</td>
+        <td>Merchant</td>
+        <td>Order Quantity</td>
+        <% if cart_path %>
+          <td>Change Quantity</td>
+        <% end %>
+        <td>Item Price</td>
+        <td>Subtotal</td>
+        <% if cart_path %>
+          <td></td>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.each do |item| %>
+        <tr id= "item-<%=item.id%>">
+          <% if cart_path %>
+            <td><img src= <%= item.image %>></td>
+          <% end %>
+          <td><%= item.name %></td>
+          <td><%= item.merchant.name %></td>
+          <% if orders_path %>
+            <td id="item-quantity"><%= @order.quantity_of_item(item.id) %></td>
+          <% elsif cart_path %>
+          <td id="item-quantity"><%= cart.count_of(item.id) %></td>
+            <td><div id = "lessen-remove"><%= button_to "-", "/cart/decrement_item/#{item.id}", method: :patch %></div>
+            <%= button_to "+", "/cart/increment_item/#{item.id}", method: :patch %></td>
+          <% elsif cart_new_path %>
+          <td id="item-quantity"><%= cart.count_of(item.id) %></td>
+          <% end %>
+          <td id = "item-price"><%= number_to_currency(item.price) %></td>
+          <% if orders_path %>
+          <td id = "item-subtotal"><%= number_to_currency(@order.subtotal_of_item(item.id)) %></td>
+          <% elsif cart_path %>
+          <td id = "item-subtotal"><%= number_to_currency(cart.subtotal(item.id)) %></td>
+          <td id = "lessen-remove"><%= button_to "Remove Item", "/cart/remove_item/#{item.id}", method: :delete %></td>
+          <% elsif cart_new_path%>
+          <td id = "item-subtotal"><%= number_to_currency(cart.subtotal(item.id)) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

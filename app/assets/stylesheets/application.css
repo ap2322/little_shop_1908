@@ -121,3 +121,59 @@ form {
   padding: 20px;
   width: 60%;
 }
+
+#cart-table {
+  width: 90%;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #27394C;
+  padding: 10px;
+}
+
+table td {
+  border: 1px solid #27394C;
+  padding: 5px;
+  text-align: center;
+}
+
+table thead {
+  background-color: #f2f2f2;
+  color: #27394C;
+}
+
+td .button_to{
+  padding: unset;
+  margin: auto;
+}
+
+td img {
+  display: block;
+  width: 30%;
+}
+
+td form {
+  background-color: unset;
+}
+
+td form input[type=submit] {
+  display: inline-flex;
+  width: unset;
+  background-color: unset;
+  color: unset;
+  padding: unset;
+  margin: unset;
+  border: none;
+  border-radius: unset;
+}
+
+#lessen-remove input[type=submit]:hover  {
+  background-color: tomato;
+}
+
+#grand-total{
+  text-align: right;
+}
