@@ -4,7 +4,12 @@
 <% end %>
 
 <%= render partial: '/partials/items_cart_order_table',
-            locals: {cart_path: true, footer_row: 7}%>
+            locals: { cart_path: true,
+                      footer_row: 7,
+                      items: @items,
+                      orders_path: false}%>
+
+<p id="grand-total">Grand Total: <%= number_to_currency(cart.grand_total) %></p>
 
 <% if !@items.empty? %>
   <%= link_to "Empty Cart", "/cart/empty", method: :delete %>

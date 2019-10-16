@@ -89,17 +89,30 @@ RSpec.describe "On the Checkout Page (aka New Order page)" do
       expect(page).to have_content("CO")
       expect(page).to have_content("80004")
 
-      expect(page).to have_content(@chain.name)
-      expect(page).to have_content(@chain.merchant.name)
-      expect(page).to have_content(@chain.price)
-      expect(page).to have_content("Quantity: 1")
-      expect(page).to have_content("Subtotal: $50.00")
+      within "#item-#{@chain.id}" do
+        expect(page).to have_content(@chain.name)
+        expect(page).to have_content(@chain.merchant.name)
+        expect(page).to have_content(@chain.price)
+        within '#item-quantity' do
+          expect(page).to have_content("1")
+        end
+        within '#item-subtotal' do
+          expect(page).to have_content("$50.00")
+        end
+      end
 
-      expect(page).to have_content(@shifter.name)
-      expect(page).to have_content(@shifter.merchant.name)
-      expect(page).to have_content(@shifter.price)
-      expect(page).to have_content("Quantity: 2")
-      expect(page).to have_content("Subtotal: $360.00")
+      within "#item-#{@shifter.id}" do
+        expect(page).to have_content(@shifter.name)
+        expect(page).to have_content(@shifter.merchant.name)
+        expect(page).to have_content(@shifter.price)
+        within '#item-quantity' do
+          expect(page).to have_content("2")
+        end
+        within '#item-subtotal' do
+          expect(page).to have_content("$360.00")
+        end
+        expect(page).to_not have_css("img[src*='#{@shifter.image}']")
+      end
 
       expect(page).to have_content("Grand Total: $410.00")
 
