@@ -1,17 +1,7 @@
 <h1>Checkout</h1>
 
-  <section id="cart-table">
-    <% @items.each do |item| %>
-      <section id= "item-<%=item.id%>">
-        <p> <%= item.name %></p>
-        <p> <%= item.merchant.name %></p>
-        <p>Price: <%= number_to_currency(item.price) %></p>
-        <p>Quantity: <%= cart.count_of(item.id) %></p>
-        <p> Item Subtotal: <%= number_to_currency(cart.subtotal(item.id)) %></p>
-      </section>
-    <% end %>
-    <p> Grand Total: <%= number_to_currency(cart.grand_total) %></p>
-  </section>
+<%= render partial: '/partials/items_cart_order_table',
+            locals: {cart_path: false, footer_row: 5}%>
 
   <center>
     <%= form_tag "/orders", method: :post do %>

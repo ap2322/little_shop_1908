@@ -138,7 +138,6 @@ table td {
   border: 1px solid #27394C;
   padding: 5px;
   text-align: center;
-
 }
 
 table thead {
@@ -173,4 +172,8 @@ td form input[type=submit] {
 
 #lessen-remove input[type=submit]:hover  {
   background-color: tomato;
+}
+
+#grand-total{
+  text-align: right;
 }

@@ -3,39 +3,9 @@
   <p>Your cart is empty</p>
 <% end %>
 
-<section id="cart-table">
-  <table>
-    <thead>
-      <tr>
-        <td></td>
-        <td>Item Name</td>
-        <td>Merchant</td>
-        <td>Order Quantity</td>
-        <td>Change Quantity</td>
-        <td>Item Price</td>
-        <td>Subtotal</td>
-        <td></td>
-      </tr>
-    </thead>
-    <tbody>
-      <% @items.each do |item| %>
-        <tr id= "item-<%=item.id%>">
-          <td><img src= <%= item.image %>></td>
-          <td><%= item.name %></td>
-          <td><%= item.merchant.name %></td>
-          <td id="item-quantity"><%= cart.count_of(item.id) %></td>
-          <td><div id = "lessen-remove"><%= button_to "-", "/cart/decrement_item/#{item.id}", method: :patch %></div>
-            <%= button_to "+", "/cart/increment_item/#{item.id}", method: :patch %></td>
-          <td id = "item-price"><%= number_to_currency(item.price) %></td>
-          <td id = "item-subtotal"><%= number_to_currency(cart.subtotal(item.id)) %></td>
-          <td id = "lessen-remove"><%= button_to "Remove Item", "/cart/remove_item/#{item.id}", method: :delete %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</section>
+<%= render partial: '/partials/items_cart_order_table',
+            locals: {cart_path: true, footer_row: 7}%>
 
-<p> Grand Total: <%= number_to_currency(cart.grand_total) %></p>
 <% if !@items.empty? %>
   <%= link_to "Empty Cart", "/cart/empty", method: :delete %>
   <%= button_to "Checkout", "/orders/new", method: :get %>
