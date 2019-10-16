@@ -51,10 +51,16 @@ class ItemsController<ApplicationController
     redirect_to "/items"
   end
 
-  def sort_rating
+  def sort_rating_highest
     @item = Item.find(params[:item_id])
 
-    render :show, locals: {reviews: @item.sort_review_by_rating}
+    render :show, locals: {reviews: @item.sort_review_by_rating(:desc, :desc)}
+  end
+  
+  def sort_rating_lowest
+    @item = Item.find(params[:item_id])
+
+    render :show, locals: {reviews: @item.sort_review_by_rating(:asc, :asc)}
   end
 
   private

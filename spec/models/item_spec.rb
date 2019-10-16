@@ -46,9 +46,12 @@ describe Item, type: :model do
       expect(@chain.average_rating).to eq(2.43)
     end
 
-    it "can sort reviews for an item by rating" do
+    it "can sort reviews for an item by rating and date" do
       expected = [@review_3, @review_7, @review_6, @review_5, @review_4, @review_2, @review_1]
-      expect(@chain.sort_review_by_rating).to eq(expected)
+      expect(@chain.sort_review_by_rating(:desc, :desc)).to eq(expected)
+
+      expected_2 = [@review_1, @review_2, @review_4, @review_5, @review_6, @review_7, @review_3]
+      expect(@chain.sort_review_by_rating(:asc, :asc)).to eq(expected_2)
     end
   end
 end

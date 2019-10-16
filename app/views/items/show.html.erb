@@ -47,7 +47,8 @@
       </article>
     </section>
     <h4>All Reviews</h4>
-    <%= link_to "Sort by highest rating", "/items/#{@item.id}/reviews/sort_rating" %>
+    <%= link_to "Sort by highest rating", "/items/#{@item.id}/reviews/sort_rating_highest" %>
+    <%= link_to "Sort by lowest rating", "/items/#{@item.id}/reviews/sort_rating_lowest" %>
     <% reviews.each do |review| %>
       <section class = "review" id = "review-<%= review.id%>">
         <p> <%= review.title %></p>

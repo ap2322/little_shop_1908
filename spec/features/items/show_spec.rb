@@ -84,7 +84,7 @@ RSpec.describe 'item show page', type: :feature do
     end
   end
 
-  it "has links to sort an item's reviews" do
+  it "has link to sort an item's reviews by highest rating" do
     visit "/items/#{@chain.id}"
 
     within ".review-show-grid" do
@@ -92,11 +92,27 @@ RSpec.describe 'item show page', type: :feature do
     end
 
     expect(page.find_all('.review')[0]).to have_content("This was great")
+    expect(page.find_all('.review')[1]).to have_content("Chain Chain Chain")
+    expect(page.find_all('.review')[2]).to have_content("Just ok")
+    expect(page.find_all('.review')[3]).to have_content("Meh")
+    expect(page.find_all('.review')[4]).to have_content("This was terrible")
+    expect(page.find_all('.review')[5]).to have_content("This blew my mind")
+    expect(page.find_all('.review')[6]).to have_content("This stunk")
+  end
+
+  it "has link to sort an item's reviews by lowest rating" do
+    visit "/items/#{@chain.id}"
+
+    within ".review-show-grid" do
+      click_link "Sort by lowest rating"
+    end
+
+    expect(page.find_all('.review')[6]).to have_content("This was great")
+    expect(page.find_all('.review')[5]).to have_content("Chain Chain Chain")
+    expect(page.find_all('.review')[4]).to have_content("Just ok")
+    expect(page.find_all('.review')[3]).to have_content("Meh")
+    expect(page.find_all('.review')[2]).to have_content("This was terrible")
+    expect(page.find_all('.review')[1]).to have_content("This blew my mind")
+    expect(page.find_all('.review')[0]).to have_content("This stunk")
   end
 end
-
-# As a visitor,
-# When I visit an item's show page to see their reviews,
-# I see additional links to sort their reviews in the following ways:
-# - sort reviews by highest rating, then by descending date
-# - sort reviews by lowest rating, then by ascending date

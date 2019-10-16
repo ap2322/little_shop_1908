@@ -83,16 +83,16 @@ RSpec.describe 'merchant show page', type: :feature do
 
       visit "/merchants/#{meg.id}"
 
-      expect(page).to have_content(helmet.name)
+      expect(page).to have_link(helmet.name)
       expect(page).to have_css("img[src*='#{helmet.image}']")
       expect(page).to have_content("Average Rating: 4.67")
-      expect(page).to have_content(shifter.name)
+      expect(page).to have_link(shifter.name)
       expect(page).to have_css("img[src*='#{shifter.image}']")
       expect(page).to have_content("Average Rating: 3.67")
-      expect(page).to have_content(chain.name)
+      expect(page).to have_link(chain.name)
       expect(page).to have_css("img[src*='#{chain.image}']")
       expect(page).to have_content("Average Rating: 2.33")
-      expect(page).to_not have_content(tire.name)
+      expect(page).to_not have_link(tire.name)
     end
   end
 end
