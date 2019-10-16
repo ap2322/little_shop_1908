@@ -17,3 +17,11 @@
   <% end %>
   </ul>
 </center>
+
+<center>
+  <% @merchant.top_items.each do |item| %>
+    <%= item.name %>
+    <%= item.image %>
+    <%= item.average_rating %>
+  <% end %>
+</center>
