@@ -27,18 +27,34 @@ RSpec.describe "cart show page" do
       click_button "Add to Cart"
 
       visit "/cart"
-      expect(page).to have_content(@chain.name)
-      expect(page).to have_css("img[src*='#{@chain.image}']")
-      expect(page).to have_content(@chain.merchant.name)
-      expect(page).to have_content("Item Price: $50.00")
-      expect(page).to have_content("Quantity: 1")
-      expect(page).to have_content("Item Subtotal: $50.00")
-      expect(page).to have_content(@shifter.name)
-      expect(page).to have_css("img[src*='#{@shifter.image}']")
-      expect(page).to have_content(@shifter.merchant.name)
-      expect(page).to have_content("Item Price: $180.00")
-      expect(page).to have_content("Quantity: 2")
-      expect(page).to have_content("Item Subtotal: $360.00")
+      within "#item-#{@chain.id}" do
+        expect(page).to have_content(@chain.name)
+        expect(page).to have_css("img[src*='#{@chain.image}']")
+        expect(page).to have_content(@chain.merchant.name)
+        within "#item-price" do
+          expect(page).to have_content("$50.00")
+        end
+        within "#item-quantity" do
+          expect(page).to have_content("1")
+        end
+        within "#item-subtotal" do
+          expect(page).to have_content("$50.00")
+        end
+      end
+      within "#item-#{@shifter.id}" do
+        expect(page).to have_content(@shifter.name)
+        expect(page).to have_css("img[src*='#{@shifter.image}']")
+        expect(page).to have_content(@shifter.merchant.name)
+        within "#item-price" do
+          expect(page).to have_content("$180.00")
+        end
+        within "#item-quantity" do
+          expect(page).to have_content("2")
+        end
+        within "#item-subtotal" do
+          expect(page).to have_content("$360.00")
+        end
+      end
       expect(page).to have_content("Grand Total: $410.00")
       expect(page).to_not have_content("Your cart is empty")
     end
@@ -118,16 +134,24 @@ RSpec.describe "cart show page" do
 
       visit "/cart"
       within "#item-#{@chain.id}" do
-        expect(page).to have_content("Quantity: 1")
+        within "#item-quantity" do
+          expect(page).to have_content("1")
+        end
         click_button "+"
-        expect(page).to have_content("Quantity: 2")
+        within "#item-quantity" do
+          expect(page).to have_content("2")
+        end
       end
       expect(page).to_not have_content("Only 5 Chains in stock")
 
       within "#item-#{@shifter.id}" do
-        expect(page).to have_content("Quantity: 2")
+        within "#item-quantity" do
+          expect(page).to have_content("2")
+        end
         click_button "+"
-        expect(page).to have_content("Quantity: 2")
+        within "#item-quantity" do
+          expect(page).to have_content("2")
+        end
       end
 
       expect(page).to have_content("Only 2 Shimano Shifters in stock")
@@ -144,7 +168,9 @@ RSpec.describe "cart show page" do
 
       visit "/cart"
       within "#item-#{@chain.id}" do
-        expect(page).to have_content("Quantity: 1")
+        within "#item-quantity" do
+          expect(page).to have_content("1")
+        end
         click_button "-"
       end
       within "#cart-table" do
@@ -154,9 +180,13 @@ RSpec.describe "cart show page" do
       expect(current_path).to eq('/cart')
 
       within "#item-#{@shifter.id}" do
-        expect(page).to have_content("Quantity: 2")
+        within "#item-quantity" do
+          expect(page).to have_content("2")
+        end
         click_button "-"
-        expect(page).to have_content("Quantity: 1")
+        within "#item-quantity" do
+          expect(page).to have_content("1")
+        end
         click_button "-"
       end
 
