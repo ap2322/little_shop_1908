@@ -7,6 +7,7 @@ class Order < ApplicationRecord
   validates_presence_of :city
   validates_presence_of :state
   validates_presence_of :zip
+  validates_uniqueness_of :verif, allow_nil: true
 
   def quantity_of_item(item_id)
     item_orders.where(item_id: item_id).pluck(:item_quantity).first
@@ -19,5 +20,9 @@ class Order < ApplicationRecord
 
   def grand_total
     item_orders.sum('item_price * item_quantity')
+  end
+
+  def gen_verif
+    update!(verif: SecureRandom.hex(10))
   end
 end

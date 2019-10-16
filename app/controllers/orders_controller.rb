@@ -10,7 +10,9 @@ class OrdersController < ApplicationController
 
     if order.save
       make_item_orders(order)
+      order.gen_verif
       session[:cart] = {}
+      flash[:order_verif] = "Order verification code: #{order.verif}"
       redirect_to "/orders/#{order.id}"
     else
       flash.now[:incomplete_order] = "Please fill in all fields to complete your order"
@@ -21,6 +23,11 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:order_id])
+  end
+
+  def verified
+    @order = Order.find_by(verif: params[:order_verif])
+    render :show
   end
 
 private

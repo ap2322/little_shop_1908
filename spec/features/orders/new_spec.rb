@@ -165,6 +165,8 @@ RSpec.describe "On the Checkout Page (aka New Order page)" do
       click_button "Create Order"
 
       order = Order.last
+      
+      expect(page).to have_content(order.verif)
 
       within "#cart" do
         expect(page).to have_content("0")
