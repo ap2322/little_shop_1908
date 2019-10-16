@@ -18,10 +18,13 @@
   </ul>
 </center>
 
-<center>
+<h2>Top Items</h2>
+<section class="grid-container">
   <% @merchant.top_items.each do |item| %>
-    <%= item.name %>
-    <%= item.image %>
-    <%= item.average_rating %>
+  <section class = "grid-item" id= 'item-<%=item.id%>'>
+    <p><%= item.name %></p>
+    <img src= <%= item.image %>>
+    <p>Average Rating: <%= item.average_rating %></p>
+  </section>
   <% end %>
-</center>
+</section>
