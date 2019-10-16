@@ -10,21 +10,15 @@
 
   <body>
     <nav class = "topnav">
-      <ul>
-        <li><%= link_to "All Merchants", "/merchants"%></li>
-        <li><%= link_to "All Items", "/items"%></li>
-        <li><%= link_to "All Items", "/items"%></li>
-        <li><%= link_to "Cart: #{cart.total_count}", "/cart", id: "cart" %></li>
-        <li><%= form_tag "/verified_order", method: :get do %>
+        <%= link_to "All Merchants", "/merchants"%>
+        <%= link_to "All Items", "/items"%>
+        <%= link_to "All Items", "/items"%>
+        <%= link_to "Cart: #{cart.total_count}", "/cart", id: "cart" %>
+        <div class = topnav><%= form_tag "/verified_order", method: :get do %>
           <%= label_tag :order_verif, "Find Order" %>
           <%= text_field_tag :order_verif %>
           <%= submit_tag "Search" %>
-        <% end %></li>
-      </ul>
-
-
-
-
+        <% end %></div>
     </nav>
 
     <% flash.each do |type, message| %>
