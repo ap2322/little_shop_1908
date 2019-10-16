@@ -27,4 +27,8 @@ class Item <ApplicationRecord
   def in_order?
     !item_orders.all.empty?
   end
+
+  def sort_review_by_rating(rating_sort, date_sort)
+    reviews.order(rating: rating_sort).order(created_at: date_sort)
+  end
 end

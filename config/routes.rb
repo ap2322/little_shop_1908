@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   get "/items/:item_id/reviews/new", to: "reviews#new"
   get "/items/:item_id/reviews/:review_id/edit", to: "reviews#edit"
+  get "/items/:item_id/reviews/sort_rating_highest", to: "items#sort_rating_highest"
+  get "/items/:item_id/reviews/sort_rating_lowest", to: "items#sort_rating_lowest"
   patch "/items/:item_id/reviews/:review_id", to: "reviews#update"
   post "/items/:item_id/reviews", to: "reviews#create"
   delete "/items/:item_id/reviews/:review_id", to: "reviews#destroy"

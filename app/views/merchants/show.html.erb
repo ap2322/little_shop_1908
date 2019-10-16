@@ -22,7 +22,7 @@
 <section class="grid-container">
   <% @merchant.top_items.each do |item| %>
   <section class = "grid-item" id= 'item-<%=item.id%>'>
-    <p><%= item.name %></p>
+    <h2> <%=link_to item.name, "/items/#{item.id}" %> </h2>
     <img src= <%= item.image %>>
     <p>Average Rating: <%= item.average_rating %></p>
   </section>

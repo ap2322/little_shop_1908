@@ -82,21 +82,17 @@ RSpec.describe 'merchant show page', type: :feature do
       helmet_review_3 = helmet.reviews.create(title: "Wow!", content: "Like a shield for head", rating: 5)
 
       visit "/merchants/#{meg.id}"
-      save_and_open_page
-      expect(page).to have_content(helmet.name)
+
+      expect(page).to have_link(helmet.name)
       expect(page).to have_css("img[src*='#{helmet.image}']")
       expect(page).to have_content("Average Rating: 4.67")
-      expect(page).to have_content(shifter.name)
+      expect(page).to have_link(shifter.name)
       expect(page).to have_css("img[src*='#{shifter.image}']")
       expect(page).to have_content("Average Rating: 3.67")
-      expect(page).to have_content(chain.name)
+      expect(page).to have_link(chain.name)
       expect(page).to have_css("img[src*='#{chain.image}']")
       expect(page).to have_content("Average Rating: 2.33")
-      expect(page).to_not have_content(tire.name)
+      expect(page).to_not have_link(tire.name)
     end
   end
 end
-
-# As a visitor,
-# When I visit an merchant's show page
-# I see the top 3 highest rated items for that merchant (by average rating)
