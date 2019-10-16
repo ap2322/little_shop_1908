@@ -83,4 +83,20 @@ RSpec.describe 'item show page', type: :feature do
       end
     end
   end
+
+  it "has links to sort an item's reviews" do
+    visit "/items/#{@chain.id}"
+
+    within ".review-show-grid" do
+      click_link "Sort by highest rating"
+    end
+
+    expect(page.find_all('.review')[0]).to have_content("This was great")
+  end
 end
+
+# As a visitor,
+# When I visit an item's show page to see their reviews,
+# I see additional links to sort their reviews in the following ways:
+# - sort reviews by highest rating, then by descending date
+# - sort reviews by lowest rating, then by ascending date

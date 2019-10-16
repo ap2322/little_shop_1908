@@ -82,7 +82,7 @@ RSpec.describe 'merchant show page', type: :feature do
       helmet_review_3 = helmet.reviews.create(title: "Wow!", content: "Like a shield for head", rating: 5)
 
       visit "/merchants/#{meg.id}"
-      save_and_open_page
+
       expect(page).to have_content(helmet.name)
       expect(page).to have_css("img[src*='#{helmet.image}']")
       expect(page).to have_content("Average Rating: 4.67")
@@ -96,7 +96,3 @@ RSpec.describe 'merchant show page', type: :feature do
     end
   end
 end
-
-# As a visitor,
-# When I visit an merchant's show page
-# I see the top 3 highest rated items for that merchant (by average rating)

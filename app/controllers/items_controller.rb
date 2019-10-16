@@ -11,6 +11,7 @@ class ItemsController<ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    render :show, locals: {reviews: @item.reviews}
   end
 
   def new
@@ -48,6 +49,12 @@ class ItemsController<ApplicationController
   def destroy
     Item.destroy(params[:id])
     redirect_to "/items"
+  end
+
+  def sort_rating
+    @item = Item.find(params[:item_id])
+
+    render :show, locals: {reviews: @item.sort_review_by_rating}
   end
 
   private
