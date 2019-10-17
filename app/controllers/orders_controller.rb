@@ -31,6 +31,13 @@ class OrdersController < ApplicationController
     render :show, locals: { verified: true }
   end
 
+  def destroy
+    order = Order.find_by(verif: params[:order_verif])
+    binding.pry
+    order.destroy(order.id)
+    redirect_to "/orders"
+  end
+
 private
   def order_params
     params.permit(:name,:address,:city,:state,:zip)

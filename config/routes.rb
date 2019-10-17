@@ -38,4 +38,5 @@ Rails.application.routes.draw do
   post "/orders", to: "orders#create"
 
   get "/verified_order", to: "orders#verified"
+  delete "/orders/:order_verif", to: "orders#destroy"
 end

@@ -1,31 +1,36 @@
 require 'rails_helper'
 
 describe "With an order verification" do
-  it "can find an order by the verification number" do
-    bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
-    chain = bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 50, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 5)
-    shifter = bike_shop.items.create(name: "Shimano Shifters", description: "It'll always shift!", active?: false, price: 180, image: "https://images-na.ssl-images-amazon.com/images/I/4142WWbN64L._SX466_.jpg", inventory: 2)
-    order = Order.create(name: "Rambo", address: "234 Broadway", city: "Denver", state: "CO", zip: "84309")
-    item_order_1 = ItemOrder.create(item_id: chain.id, order_id: order.id, item_price: chain.price, item_quantity: 2)
-    item_order_2 = ItemOrder.create(item_id: shifter.id, order_id: order.id, item_price: shifter.price, item_quantity: 1)
-
-    order.update(verif: "1234578022")
+  before(:each) do
+    @bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+    @chain = @bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 50, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 5)
+    @shifter = @bike_shop.items.create(name: "Shimano Shifters", description: "It'll always shift!", active?: false, price: 180, image: "https://images-na.ssl-images-amazon.com/images/I/4142WWbN64L._SX466_.jpg", inventory: 2)
+    @order = Order.create(name: "Rambo", address: "234 Broadway", city: "Denver", state: "CO", zip: "84309")
+    item_order_1 = ItemOrder.create(item_id: @chain.id, order_id: @order.id, item_price: @chain.price, item_quantity: 2)
+    item_order_2 = ItemOrder.create(item_id: @shifter.id, order_id: @order.id, item_price: @shifter.price, item_quantity: 1)
+    @order_2 = Order.create(name: "Guy", address: "234 Broadway", city: "Loveland", state: "CO", zip: "84309")
+    item_order_3 = ItemOrder.create(item_id: @chain.id, order_id: @order_2.id, item_price: @chain.price, item_quantity: 2)
+    item_order_4 = ItemOrder.create(item_id: @shifter.id, order_id: @order_2.id, item_price: @shifter.price, item_quantity: 1)
+    @order.update(verif: "1234578022")
+    @order_2.update(verif: "4444444444")
 
     visit '/merchants'
+  end
 
+  it "can find an order by the verification number" do
     within 'nav' do
       fill_in :order_verif, with: "1234578022"
       click_button 'Search'
     end
 
     expect(current_path).to eq '/verified_order'
-    expect(page).to have_content order.name
-    expect(page).to have_content order.address
-    expect(page).to have_content order.city
-    expect(page).to have_content order.state
-    expect(page).to have_content order.zip
-    expect(page).to have_content chain.name
-    expect(page).to have_content shifter.name
+    expect(page).to have_content @order.name
+    expect(page).to have_content @order.address
+    expect(page).to have_content @order.city
+    expect(page).to have_content @order.state
+    expect(page).to have_content @order.zip
+    expect(page).to have_content @chain.name
+    expect(page).to have_content @shifter.name
 
     expect(page).to have_link "Delete Order"
     expect(page).to have_link "Update Shipping Address"
@@ -37,6 +42,19 @@ describe "With an order verification" do
 # - update the shipping address for an order
 # - remove items from the order
 
+  end
 
+  it "can delete an order" do
+    within 'nav' do
+      fill_in :order_verif, with: "1234578022"
+      click_button 'Search'
+    end
+
+    click_link "Delete Order"
+
+    expect(current_path).to eq '/orders'
+    expect(page).to have_content "All Orders"
+    expect(page).to have_content @order_2.name
+    expect(page).to_not have_content "All Orders"
   end
 end

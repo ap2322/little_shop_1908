@@ -21,6 +21,7 @@
 </table>
 <p> Date of Order: <%= @order.created_at.strftime("%D") %></p>
 <% if verified %>
-  <%= link_to 'Delete Order', "/verified_order/#{@order.verif}" %>
+  <%= link_to 'Delete Order', "/orders/verified_order/#{@order.verif}", method: :delete %>
   <%= link_to 'Update Shipping Address', "/verified_order/#{@order.verif}/edit" %>
+  <%= link_to 'Remove Items from Order', "/verified_order/#{@order.verif}/remove_items" %>
 <% end %>
