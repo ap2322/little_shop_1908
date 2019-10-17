@@ -9,7 +9,11 @@
                       items: @items,
                       orders_path: false}%>
 
-<p id="grand-total">Grand Total: <%= number_to_currency(cart.grand_total) %></p>
+<table>
+  <tr>
+    <td id="grand-total">Grand Total: <%= number_to_currency(cart.grand_total) %></td>
+  </tr>
+</table>
 
 <% if !@items.empty? %>
   <%= link_to "Empty Cart", "/cart/empty", method: :delete %>

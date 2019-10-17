@@ -6,11 +6,11 @@
 
     <%= text_field_tag :description, nil, placeholder: "Description" %>
 
-    <%= text_field_tag :price, nil, placeholder: "Price" %>
+    <%= number_field_tag :price, nil, placeholder: "Price", min: 0 %>
 
     <%= text_field_tag :image, nil, placeholder: "Image" %>
 
-    <%= text_field_tag :inventory, nil, placeholder: "Inventory" %>
+    <%= number_field_tag :inventory, nil, placeholder: "Inventory", min: 0 %>
 
     <%= submit_tag 'Create Item' %>
   <% end %>
