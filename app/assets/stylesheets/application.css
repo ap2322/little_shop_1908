@@ -91,7 +91,7 @@ img{
    text-align: center;
  }
 
- input[type=text], select {
+ input[type=text], input[type=number], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -123,13 +123,9 @@ form {
   width: 60%;
 }
 
-#cart-table {
-  width: 90%;
-}
-
 table {
   table-layout: fixed;
-  width: 100%;
+  width: 90%;
   border-collapse: collapse;
   border: 1px solid #27394C;
   padding: 10px;
