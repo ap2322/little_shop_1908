@@ -7,8 +7,11 @@
                       orders_path: false,
                       cart_new_path: true,}%>
 
-<p id="grand-total">Grand Total: <%= number_to_currency(cart.grand_total) %></p>
-
+<table>
+  <tr>
+    <td id="grand-total">Grand Total: <%= number_to_currency(cart.grand_total) %></td>
+  </tr>
+</table>
   <center>
     <%= render partial: "partials/new_form",locals: {path: "/orders", method: :post, button: 'Create Order'} %>
   </center>
