@@ -15,7 +15,9 @@
  */
 
  body {
- background-color: white;
+   background-color: white;
+   font-family: 'Muli', sans-serif;
+
  }
 
  h1 {
@@ -33,14 +35,14 @@ img{
   width: 50%;
 }
 
- .grid-container{
+ .grid-container {
  	display: grid;
  	grid-template-columns: repeat(5,1fr);
  	grid-template-rows: auto;
  	grid-gap: 30px;
  }
 
- .grid-item{
+ .grid-item {
  	background-color: #17BEBB;
  	padding: 20px;
   border: solid;
@@ -48,8 +50,9 @@ img{
   border-color: #002244;
  	text-align: center
  }
- .item-show-grid{
-  width: 60%;
+ 
+ .item-show-grid {
+  width: 40%;
  	display: grid;
   border: solid;
   border-radius: 12px;
