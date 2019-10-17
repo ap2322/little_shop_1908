@@ -13,8 +13,8 @@
     <%= label_tag :state %>
     <%= text_field_tag :state, "#{@merchant.state}" %>
 
-    <%= label_tag :zip %>
-    <%= text_field_tag :zip,"#{@merchant.zip}", pattern: "[0-9]{5}" %>
+    <%= label_tag :zip, "5-Digit Zip"  %>
+    <%= text_field_tag :zip, "#{@merchant.zip}", pattern: "[0-9]{5}" %>
 
     <%= submit_tag 'Update Merchant' %>
   <% end %>
