@@ -9,10 +9,13 @@
 </section>
 
 <%= render partial: '/partials/items_cart_order_table',
-            locals: { items: @order.items,
-                      cart_path: false,
-                      footer_row: 5,
-                      orders_path: true}%>
+            locals: {
+              items: @order.items,
+              cart_path: false,
+              footer_row: 5,
+              orders_path: true
+            }
+%>
 
 <table>
   <tr>
