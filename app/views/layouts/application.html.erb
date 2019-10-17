@@ -12,9 +12,8 @@
     <nav class = "topnav">
         <%= link_to "All Merchants", "/merchants"%>
         <%= link_to "All Items", "/items"%>
-        <%= link_to "All Items", "/items"%>
         <%= link_to "Cart: #{cart.total_count}", "/cart", id: "cart" %>
-        <div class = topnav><%= form_tag "/verified_order", method: :get do %>
+        <div class = nav-search><%= form_tag "/verified_order", method: :get do %>
           <%= label_tag :order_verif, "Find Order" %>
           <%= text_field_tag :order_verif %>
           <%= submit_tag "Search" %>

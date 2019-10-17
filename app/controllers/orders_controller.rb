@@ -23,11 +23,12 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:order_id])
+    render locals: { verified: false }
   end
 
   def verified
     @order = Order.find_by(verif: params[:order_verif])
-    render :show
+    render :show, locals: { verified: true }
   end
 
 private
